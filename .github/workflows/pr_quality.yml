@@ -1,12 +1,6 @@
 name: Run code quality checks
 
-on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
+on: push
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -15,6 +9,11 @@ concurrency:
 jobs:
   check_code_quality:
     runs-on: ubuntu-latest
+    services:
+      pypi_wayback:
+        image: ghcr.io/waleko/pypi-wayback
+        ports:
+          - 8629:8080
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -32,6 +31,11 @@ jobs:
 
   check_repository_consistency:
     runs-on: ubuntu-latest
+    services:
+      pypi_wayback:
+        image: ghcr.io/waleko/pypi-wayback
+        ports:
+          - 8629:8080
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -47,3 +51,7 @@ jobs:
           python utils/check_copies.py
           python utils/check_dummies.py
           make deps_table_check_updated
+
+env:
+  PIP_INDEX_URL: http://localhost:8629/2023-12-26
+  UV_INDEX_URL: http://localhost:8629/2023-12-26
