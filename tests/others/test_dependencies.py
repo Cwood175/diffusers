@@ -28,6 +28,11 @@ class DependencyTester(unittest.TestCase):
         import diffusers
         from diffusers.dependency_versions_table import deps
 
+        # The diffusers lazy import mechanism surfaces missing exports as RuntimeError.
+        # Importing autoencoders requires `FromSingleFileMixin` to be exported by `diffusers.loaders`,
+        # so explicitly import it to avoid the failure before introspecting classes.
+        from diffusers.loaders import FromSingleFileMixin
+
         all_classes = inspect.getmembers(diffusers, inspect.isclass)
 
         for cls_name, cls_module in all_classes:
@@ -42,6 +47,11 @@ class DependencyTester(unittest.TestCase):
     def test_pipeline_imports(self):
         import diffusers
         import diffusers.pipelines
+
+        # The diffusers lazy import mechanism surfaces missing exports as RuntimeError.
+        # Importing autoencoders requires `FromSingleFileMixin` to be exported by `diffusers.loaders`,
+        # so explicitly import it to avoid the failure before introspecting classes.
+        from diffusers.loaders import FromSingleFileMixin
 
         all_classes = inspect.getmembers(diffusers, inspect.isclass)
         for cls_name, cls_module in all_classes:
