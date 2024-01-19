@@ -23,13 +23,6 @@ import requests
 import torch
 import yaml
 from safetensors.torch import load_file as safe_load
-from transformers import (
-    CLIPTextConfig,
-    CLIPTextModel,
-    CLIPTextModelWithProjection,
-    CLIPTokenizer,
-)
-
 from ..models import UNet2DConditionModel
 from ..schedulers import (
     DDIMScheduler,
