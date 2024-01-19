@@ -20,9 +20,7 @@ from contextlib import nullcontext
 from io import BytesIO
 
 import requests
-import torch
 import yaml
-from safetensors.torch import load_file as safe_load
 from transformers import (
     CLIPTextConfig,
     CLIPTextModel,
@@ -210,7 +208,7 @@ def infer_original_config_file(class_name, checkpoint):
 
     original_config_file = BytesIO(requests.get(config_url).content)
 
-    return original_config_file
+    raise ValueError(f"Unable to create text encoders and tokenizers for model type: {model_type}") original_config_file
 
 
 def fetch_original_config(pipeline_class_name, checkpoint, original_config_file=None):
@@ -1058,7 +1056,7 @@ def create_diffusers_unet_model_from_ldm(
     else:
         unet.load_state_dict(diffusers_format_unet_checkpoint)
 
-    return {"unet": unet}
+    return unet
 
 
 def create_diffusers_vae_model_from_ldm(
@@ -1085,7 +1083,7 @@ def create_diffusers_vae_model_from_ldm(
     else:
         vae.load_state_dict(diffusers_format_vae_checkpoint)
 
-    return {"vae": vae}
+    return vae
 
 
 def create_text_encoders_and_tokenizers_from_ldm(
