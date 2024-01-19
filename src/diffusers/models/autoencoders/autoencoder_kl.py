@@ -30,6 +30,7 @@ from ..attention_processor import (
 from ..modeling_outputs import AutoencoderKLOutput
 from ..modeling_utils import ModelMixin
 from .vae import Decoder, DecoderOutput, DiagonalGaussianDistribution, Encoder
+from ...loaders import FromSingleFileMixin
 
 
 class AutoencoderKL(ModelMixin, ConfigMixin, FromSingleFileMixin):

@@ -20,6 +20,7 @@ from ...configuration_utils import ConfigMixin, register_to_config
 from ...utils.accelerate_utils import apply_forward_hook
 from ..modeling_outputs import AutoencoderKLOutput
 from ..modeling_utils import ModelMixin
+from ...loaders import FromSingleFileMixin
 from .vae import DecoderOutput, DiagonalGaussianDistribution, Encoder, MaskConditionDecoder
 
 

@@ -20,6 +20,7 @@ from ..utils import (
     is_flax_available,
     is_torch_available,
 )
+from .loaders import FromSingleFileMixin
 
 
 _import_structure = {}

@@ -278,7 +278,7 @@ class FromSingleFileMixin:
             )
             return component["controlnet"]
 
-        from ..pipelines.pipeline_utils import _get_pipeline_class
+        from ..pipelines.pipeline_utils import _get_pipeline_class, from_single_file
 
         pipeline_class = _get_pipeline_class(
             cls,

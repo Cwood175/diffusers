@@ -1,3 +1,4 @@
+from diffusers.loaders import FromSingleFileMixin
 from .autoencoder_asym_kl import AsymmetricAutoencoderKL
 from .autoencoder_kl import AutoencoderKL
 from .autoencoder_kl_temporal_decoder import AutoencoderKLTemporalDecoder

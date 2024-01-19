@@ -56,6 +56,7 @@ _import_structure = {}
 if is_torch_available():
     _import_structure["unet"] = ["UNet2DConditionLoadersMixin"]
     _import_structure["utils"] = ["AttnProcsLayers"]
+    _import_structure["from_single_file"] = ["FromSingleFileMixin"]
 
     if is_transformers_available():
         _import_structure["single_file"] = ["FromSingleFileMixin"]

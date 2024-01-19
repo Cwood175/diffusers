@@ -27,6 +27,7 @@ class DependencyTester(unittest.TestCase):
     def test_backend_registration(self):
         import diffusers
         from diffusers.dependency_versions_table import deps
+        from diffusers.loaders import FromSingleFileMixin
 
         all_classes = inspect.getmembers(diffusers, inspect.isclass)
 
@@ -42,6 +43,7 @@ class DependencyTester(unittest.TestCase):
     def test_pipeline_imports(self):
         import diffusers
         import diffusers.pipelines
+        from diffusers.loaders import FromSingleFileMixin
 
         all_classes = inspect.getmembers(diffusers, inspect.isclass)
         for cls_name, cls_module in all_classes:
