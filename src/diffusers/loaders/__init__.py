@@ -57,8 +57,9 @@ if is_torch_available():
     _import_structure["unet"] = ["UNet2DConditionLoadersMixin"]
     _import_structure["utils"] = ["AttnProcsLayers"]
 
+    _import_structure["single_file"] = ["FromSingleFileMixin"]
+
     if is_transformers_available():
-        _import_structure["single_file"] = ["FromSingleFileMixin"]
         _import_structure["lora"] = ["LoraLoaderMixin", "StableDiffusionXLLoraLoaderMixin"]
         _import_structure["textual_inversion"] = ["TextualInversionLoaderMixin"]
         _import_structure["ip_adapter"] = ["IPAdapterMixin"]
@@ -71,10 +72,11 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         from .unet import UNet2DConditionLoadersMixin
         from .utils import AttnProcsLayers
 
+        from .single_file import FromSingleFileMixin
+
         if is_transformers_available():
             from .ip_adapter import IPAdapterMixin
             from .lora import LoraLoaderMixin, StableDiffusionXLLoraLoaderMixin
-            from .single_file import FromSingleFileMixin
             from .textual_inversion import TextualInversionLoaderMixin
 
     from .peft import PeftAdapterMixin
