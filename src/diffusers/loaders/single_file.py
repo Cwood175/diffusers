@@ -15,10 +15,10 @@ import os
 import re
 
 from huggingface_hub.utils import validate_hf_hub_args
-from transformers import AutoFeatureExtractor
 
 from ..models.modeling_utils import load_state_dict
 from ..utils import (
+    is_transformers_available,
     logging,
 )
 from ..utils.hub_utils import _get_model_file
@@ -31,6 +31,10 @@ from .single_file_utils import (
     fetch_original_config,
     infer_model_type,
 )
+
+
+if is_transformers_available():
+    from transformers import AutoFeatureExtractor
 
 
 logger = logging.get_logger(__name__)
