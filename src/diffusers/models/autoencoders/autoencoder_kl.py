@@ -17,7 +17,18 @@ import torch
 import torch.nn as nn
 
 from ...configuration_utils import ConfigMixin, register_to_config
-from ...loaders import FromSingleFileMixin
+
+
+try:
+    from ...loaders import FromSingleFileMixin
+except ImportError:
+
+    class FromSingleFileMixin:
+        @classmethod
+        def from_single_file(cls, *args, **kwargs):
+            raise ImportError("FromSingleFileMixin is not available in diffusers.loaders in this installation.")
+
+
 from ...utils.accelerate_utils import apply_forward_hook
 from ..attention_processor import (
     ADDED_KV_ATTENTION_PROCESSORS,
