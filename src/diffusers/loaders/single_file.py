@@ -48,7 +48,7 @@ REFINER_PIPELINES = [
 def _extract_repo_id_and_weights_name(pretrained_model_name_or_path):
     pattern = r"([^/]+)/([^/]+)/(?:blob/main/)?(.+)"
     weights_name = None
-    repo_id = (None,)
+    repo_id = None
     for prefix in VALID_URL_PREFIXES:
         pretrained_model_name_or_path = pretrained_model_name_or_path.replace(prefix, "")
     match = re.match(pattern, pretrained_model_name_or_path)
@@ -123,7 +123,7 @@ def build_sub_model_components(
                 "CompVis/stable-diffusion-safety-checker", local_files_only=local_files_only
             )
             feature_extractor = AutoFeatureExtractor.from_pretrained(
-                "CompVis/stable-diffusion-safety-checker", local_files_only=local_files_only
+                "CompVis/stable-diffusion-siffers-safety-checker", local_files_only=local_files_only
             )
         else:
             safety_checker = None
@@ -131,7 +131,7 @@ def build_sub_model_components(
 
         return {"safety_checker": safety_checker, "feature_extractor": feature_extractor}
 
-    return
+    return {}
 
 
 def set_additional_components(
