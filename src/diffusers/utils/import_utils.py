@@ -14,6 +14,7 @@
 """
 Import utilities: Utilities related to imports and our lazy inits.
 """
+
 import importlib.util
 import operator as op
 import os
@@ -219,7 +220,7 @@ except importlib_metadata.PackageNotFoundError:
 _wandb_available = importlib.util.find_spec("wandb") is not None
 try:
     _wandb_version = importlib_metadata.version("wandb")
-    logger.debug(f"Successfully imported wandb version {_wandb_version }")
+    logger.debug(f"Successfully imported wandb version {_wandb_version}")
 except importlib_metadata.PackageNotFoundError:
     _wandb_available = False
 
@@ -689,13 +690,7 @@ class _LazyModule(ModuleType):
         return value
 
     def _get_module(self, module_name: str):
-        try:
-            return importlib.import_module("." + module_name, self.__name__)
-        except Exception as e:
-            raise RuntimeError(
-                f"Failed to import {self.__name__}.{module_name} because of the following error (look up to see its"
-                f" traceback):\n{e}"
-            ) from e
+        return importlib.import_module("." + module_name, self.__name__)
 
     def __reduce__(self):
         return (self.__class__, (self._name, self.__file__, self._import_structure))
